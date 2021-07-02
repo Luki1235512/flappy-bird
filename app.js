@@ -2,12 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	const bird = document.querySelector('.bird')
 	const gameDisplay = document.querySelector('.game-container')
 	const ground = document.querySelector('.ground')
+	var scoreDisplay = document.getElementById('score')
 
 	let birdLeft = 220
 	let birdBottom = 100
 	let gravity = 2
 	let isGameOver = false
 	let gap = 430
+	let score = 0
 
 	function startGame() {
 		if (birdBottom > 0)
@@ -71,7 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		let timerId = setInterval(moveObstacle, 20)
 
 		if (!isGameOver) {
-			setTimeout(generateObstacle, 3000) 
+			setTimeout(generateObstacle, 3000)
+			scoreDisplay.innerHTML = score
+			score += 1
 		}
 
 	}
