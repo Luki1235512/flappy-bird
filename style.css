@@ -64,6 +64,8 @@ body {
 	position: absolute;
 	width: 60px;
 	height: 45px;
+	bottom: 100px;
+	left: 220px;
 }
 
 .obstacle {
