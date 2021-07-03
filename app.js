@@ -1,4 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
+
+document.addEventListener("keydown", StartGame)
+
+function StartGame() {
+	document.removeEventListener("keydown", StartGame)
 	const bird = document.querySelector('.bird')
 	const gameDisplay = document.querySelector('.game-container')
 	const ground = document.querySelector('.ground')
@@ -18,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		bird.style.left = birdLeft + 'px'
 	}
 
-	let gameTimerId =setInterval(startGame, 20)
+	let gameTimerId = setInterval(startGame, 20)
 
 	function control(e) {
 		if (e.keyCode === 32) {
@@ -74,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		if (!isGameOver) {
 			setTimeout(generateObstacle, 3000)
+			// document.getElementById("score").innerHTML = score
 			scoreDisplay.innerHTML = score
 			score += 1
 		}
@@ -87,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		console.log('game over')
 		isGameOver = true
 		document.removeEventListener('keyup', control)
-	}
+	}	
+}
 
-	// clearInterval(timerId)
-})
