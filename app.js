@@ -1,8 +1,30 @@
 
-document.addEventListener("keydown", StartGame)
+var menuGone = false
+
+window.onload=function() {
+	var element = document.getElementById("play")
+
+	document.addEventListener('click', function( event ) {
+		if (element === event.target && element.contains(event.target)) {    
+		document.getElementById("menu").style.display = "none"
+		menuGone = true
+		}
+	  })
+}
+
+
+document.addEventListener("keydown", detectSpace)
+
+function detectSpace(e) {
+	if (e.keyCode === 32) {
+		if (menuGone) {
+			StartGame()
+			document.removeEventListener("keydown", detectSpace)
+		}
+	}
+}
 
 function StartGame() {
-	document.removeEventListener("keydown", StartGame)
 	const bird = document.querySelector('.bird')
 	const gameDisplay = document.querySelector('.game-container')
 	const ground = document.querySelector('.ground')
@@ -37,12 +59,24 @@ function StartGame() {
 	}
 	document.addEventListener('keyup', control)
 
+	function getRandomInt(min, max) {
+		min = Math.ceil(min)
+		max = Math.floor(max)
+		return Math.floor(Math.random() * (max - min + 1)) + min
+	}
+
 	function generateObstacle() {
 		let obstacleLeft = 500
 		let randomHeight = Math.random() * 100 
 		let obstacleBottom = randomHeight
 		const obstacle = document.createElement('div')
 		const topObstacle = document.createElement('div')
+		var numer = getRandomInt(0, 5)
+		const obstakle = ["url('img/hp.png')", "url('img/jck.png')", "url('img/wlodek.png')", "url('img/fedzio.png')", "url('img/dburak.png')", "url('img/crwiow.png')"]
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		obstacle.style.backgroundImage = obstakle[numer]
+		topObstacle.style.backgroundImage = obstakle[numer]
+
 
 		if (!isGameOver) {
 			obstacle.classList.add('obstacle')
@@ -79,7 +113,7 @@ function StartGame() {
 		if (!isGameOver) {
 			setTimeout(generateObstacle, 3000)
 			// document.getElementById("score").innerHTML = score
-			scoreDisplay.innerHTML = score
+			scoreDisplay.innerHTML = 'ECTS: ' + score
 			score += 1
 		}
 
